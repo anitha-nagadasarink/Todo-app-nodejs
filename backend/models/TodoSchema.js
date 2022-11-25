@@ -7,7 +7,8 @@ const TodoSchema = new mongoose.Schema({
     maxlength: [25, "Todo should be in 25 character length"],
     required: true,
     uniquue: true
-  }
+  },
+  tasks: [String]
 });
 
 module.exports = mongoose.model("Todo", TodoSchema);

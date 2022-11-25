@@ -68,6 +68,27 @@ exports.deleteTodo = async (req, res) => {
 };
 
 
+//Add Tasks to Todo
+exports.createTask = async (req, res) => {
+  try {
+    const todoId = req.params.todoId;
+    const todo = await Todo.findById(todoId);
+    if (!todo) res.status(400).send(todoId);
+    const { text } = req.body;
+    todo.tasks.push(text);
+    await todo.save()
+    res.status(200).json({
+      success: true,
+      message: "Task craeteed successfully",
+      todo
+    });
+  }
+  catch (err) {
+    console.log(`Error oin creating the task ${err}`)
+  }
+
+}
+
 // exports.createTodo = async (req, res) => {
 //   try {
 //     const newTodo = new Todo({
